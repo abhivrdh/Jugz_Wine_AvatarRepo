@@ -1,0 +1,64 @@
+<svg viewBox="0 0 240 480" xmlns="http://www.w3.org/2000/svg" width="240" height="480">
+  <defs>
+    <linearGradient id="macbody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E0C06"/>
+      <stop offset="22%" stop-color="#5A2A10"/>
+      <stop offset="50%" stop-color="#8B4018"/>
+      <stop offset="78%" stop-color="#5A2A10"/>
+      <stop offset="100%" stop-color="#160804"/>
+    </linearGradient>
+    <linearGradient id="macneck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1A0A04"/>
+      <stop offset="50%" stop-color="#4A2010"/>
+      <stop offset="100%" stop-color="#130804"/>
+    </linearGradient>
+    <linearGradient id="maclabel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0E0C0"/>
+      <stop offset="100%" stop-color="#D4C090"/>
+    </linearGradient>
+    <linearGradient id="maccap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3A2008"/>
+      <stop offset="50%" stop-color="#6A3A10"/>
+      <stop offset="100%" stop-color="#2A1404"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wide squat Macallan body -->
+  <path d="M42,430 Q35,460 42,468 Q120,490 198,468 Q205,460 198,430 L192,220 Q188,185 180,160 L172,80 Q170,55 120,48 Q70,55 68,80 L60,160 Q52,185 48,220 Z" fill="url(#macbody)"/>
+
+  <!-- Liquid amber tint -->
+  <path d="M50,235 L190,235 L190,430 Q120,448 50,430Z" fill="rgba(180,90,20,0.12)"/>
+
+  <!-- Wide shine -->
+  <path d="M58,200 Q62,120 70,82 L74,56" stroke="rgba(255,255,255,0.2)" stroke-width="14" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck (shorter, wider) -->
+  <path d="M68,80 Q67,35 72,20 Q120,8 168,20 Q173,35 172,80" fill="url(#macneck)"/>
+
+  <!-- Cork/cap -->
+  <path d="M72,20 Q74,4 120,0 Q166,4 168,20 Q160,30 120,32 Q80,30 72,20z" fill="url(#maccap)"/>
+
+  <!-- Label - wide rectangle -->
+  <rect x="44" y="180" width="152" height="180" rx="6" fill="url(#maclabel)" stroke="#8B1A1A" stroke-width="2"/>
+
+  <!-- Red top band -->
+  <rect x="44" y="180" width="152" height="16" rx="5" fill="#8B1A1A"/>
+  <!-- Red bottom band -->
+  <rect x="44" y="344" width="152" height="16" rx="5" fill="#8B1A1A"/>
+
+  <!-- Label content -->
+  <rect x="52" y="203" width="136" height="3" rx="1.5" fill="#5A1A0A"/>
+  <rect x="56" y="212" width="128" height="14" rx="4" fill="#8B1A1A" opacity="0.85"/>
+  <rect x="52" y="232" width="136" height="2.5" rx="1" fill="#5A1A0A" opacity="0.7"/>
+  <rect x="60" y="240" width="120" height="6" rx="2" fill="#5A1A0A" opacity="0.5"/>
+  <!-- Macallan crest area -->
+  <ellipse cx="120" cy="280" rx="32" ry="26" fill="none" stroke="#8B1A1A" stroke-width="1.5" opacity="0.6"/>
+  <ellipse cx="120" cy="280" rx="26" ry="20" fill="none" stroke="#8B1A1A" stroke-width="1" opacity="0.4"/>
+  <rect x="108" y="270" width="24" height="20" rx="2" fill="none" stroke="#8B1A1A" stroke-width="1" opacity="0.4"/>
+  <rect x="62" y="310" width="116" height="2.5" rx="1" fill="#5A1A0A" opacity="0.7"/>
+  <rect x="66" y="318" width="108" height="6" rx="2" fill="#5A1A0A" opacity="0.5"/>
+  <rect x="62" y="330" width="116" height="2" rx="1" fill="#5A1A0A" opacity="0.6"/>
+
+  <!-- Shadow -->
+  <ellipse cx="120" cy="470" rx="60" ry="9" fill="rgba(0,0,0,0.35)"/>
+</svg>

@@ -1,0 +1,67 @@
+<svg viewBox="0 0 180 560" xmlns="http://www.w3.org/2000/svg" width="180" height="560">
+  <defs>
+    <linearGradient id="ggbody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(180,200,220,0.7)"/>
+      <stop offset="25%" stop-color="rgba(220,235,245,0.85)"/>
+      <stop offset="55%" stop-color="rgba(240,248,255,0.9)"/>
+      <stop offset="80%" stop-color="rgba(200,220,235,0.8)"/>
+      <stop offset="100%" stop-color="rgba(160,185,210,0.7)"/>
+    </linearGradient>
+    <linearGradient id="ggneck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(160,185,210,0.75)"/>
+      <stop offset="50%" stop-color="rgba(210,230,245,0.9)"/>
+      <stop offset="100%" stop-color="rgba(140,170,200,0.75)"/>
+    </linearGradient>
+    <linearGradient id="gglabel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8F0F8"/>
+      <stop offset="100%" stop-color="#C8D8EC"/>
+    </linearGradient>
+    <linearGradient id="ggcap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8090A0"/>
+      <stop offset="50%" stop-color="#B0C0D0"/>
+      <stop offset="100%" stop-color="#6070808"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Tall GG body -->
+  <path d="M45,510 Q40,535 46,542 Q90,556 134,542 Q140,535 135,510 L130,210 Q128,182 124,160 L120,65 Q118,40 90,35 Q62,40 60,65 L56,160 Q52,182 50,210 Z" fill="url(#ggbody)"/>
+
+  <!-- Inner liquid area subtle blue -->
+  <path d="M52,225 L128,225 L128,510 Q90,524 52,510Z" fill="rgba(180,210,240,0.2)"/>
+
+  <!-- Shine highlight -->
+  <path d="M56,190 Q59,120 64,68 L67,42" stroke="rgba(255,255,255,0.7)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M122,190 Q124,140 122,90" stroke="rgba(255,255,255,0.25)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck -->
+  <path d="M60,65 Q59,22 62,10 Q90,0 118,10 Q121,22 120,65" fill="url(#ggneck)"/>
+
+  <!-- Silver cap -->
+  <path d="M62,10 Q63,0 90,0 Q117,0 118,10 Q113,20 90,22 Q67,20 62,10z" fill="url(#ggcap)"/>
+
+  <!-- Label -->
+  <rect x="46" y="175" width="88" height="220" rx="4" fill="url(#gglabel)" stroke="rgba(80,100,130,0.4)" stroke-width="1.5"/>
+
+  <!-- Blue top stripe -->
+  <rect x="46" y="175" width="88" height="12" rx="3" fill="#1A3A6A"/>
+  <!-- Blue bottom stripe -->
+  <rect x="46" y="383" width="88" height="12" rx="3" fill="#1A3A6A"/>
+
+  <!-- Goose image area -->
+  <ellipse cx="90" cy="280" rx="30" ry="36" fill="none" stroke="#1A3A6A" stroke-width="1" opacity="0.5"/>
+  <!-- Flying goose silhouette simplified -->
+  <path d="M75,272 Q82,265 90,268 Q98,265 105,272 Q98,280 90,278 Q82,280 75,272z" fill="#1A3A6A" opacity="0.4"/>
+  <path d="M80,270 Q90,260 100,270" fill="none" stroke="#1A3A6A" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Label text lines -->
+  <rect x="52" y="196" width="76" height="2.5" rx="1" fill="#1A3A6A" opacity="0.7"/>
+  <rect x="55" y="204" width="70" height="10" rx="2" fill="#1A3A6A" opacity="0.85"/>
+  <rect x="52" y="220" width="76" height="2" rx="1" fill="#1A3A6A" opacity="0.6"/>
+  <rect x="54" y="330" width="72" height="8" rx="2" fill="#1A3A6A" opacity="0.8"/>
+  <rect x="52" y="344" width="76" height="2.5" rx="1" fill="#1A3A6A" opacity="0.6"/>
+  <rect x="56" y="352" width="68" height="5" rx="2" fill="#1A3A6A" opacity="0.5"/>
+  <rect x="52" y="363" width="76" height="2" rx="1" fill="#1A3A6A" opacity="0.6"/>
+
+  <!-- Glass bottom refraction -->
+  <ellipse cx="90" cy="540" rx="42" ry="7" fill="rgba(0,0,0,0.25)"/>
+</svg>

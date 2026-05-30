@@ -1,0 +1,75 @@
+<svg viewBox="0 0 220 520" xmlns="http://www.w3.org/2000/svg" width="220" height="520">
+  <defs>
+    <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3D1A08"/>
+      <stop offset="18%" stop-color="#8B3E12"/>
+      <stop offset="45%" stop-color="#C86820"/>
+      <stop offset="72%" stop-color="#9A4A14"/>
+      <stop offset="100%" stop-color="#2C1006"/>
+    </linearGradient>
+    <linearGradient id="neck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2A1006"/>
+      <stop offset="40%" stop-color="#7A3410"/>
+      <stop offset="100%" stop-color="#1E0C04"/>
+    </linearGradient>
+    <linearGradient id="label" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E8C0"/>
+      <stop offset="50%" stop-color="#EDD8A0"/>
+      <stop offset="100%" stop-color="#C8A860"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B6800"/>
+      <stop offset="50%" stop-color="#D4A800"/>
+      <stop offset="100%" stop-color="#6A5000"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="40%" stop-color="rgba(255,255,255,0.28)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="liquid" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#C86820" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#6A2A08" stop-opacity="0.9"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Bottle body -->
+  <path d="M65,460 Q55,500 60,510 Q110,528 160,510 Q165,500 155,460 L148,200 Q145,165 138,140 L132,60 Q130,35 110,30 Q90,35 88,60 L82,140 Q75,165 72,200 Z" fill="url(#body)"/>
+
+  <!-- Liquid level indicator -->
+  <path d="M72,210 Q73,205 148,205 L148,460 Q110,475 72,460 Z" fill="url(#liquid)" opacity="0.6"/>
+
+  <!-- Bottle shine -->
+  <path d="M80,180 Q82,100 90,65 L93,38" stroke="url(#shine)" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck -->
+  <path d="M88,60 Q87,20 90,8 Q110,0 130,8 Q133,20 132,60" fill="url(#neck)"/>
+
+  <!-- Cap / stopper -->
+  <ellipse cx="110" cy="5" rx="24" ry="10" fill="url(#cap)"/>
+  <rect x="98" y="2" width="24" height="12" rx="4" fill="url(#cap)"/>
+  <!-- Horse stopper detail -->
+  <circle cx="110" cy="-4" r="7" fill="#C8A000"/>
+  <path d="M106,-8 Q110,-14 114,-8 Q112,-4 110,-6 Q108,-4 106,-8z" fill="#8B6800"/>
+
+  <!-- Label background -->
+  <rect x="67" y="165" width="86" height="115" rx="6" fill="url(#label)" stroke="#C8A000" stroke-width="1.5"/>
+
+  <!-- Label red stripe top -->
+  <rect x="67" y="165" width="86" height="12" rx="5" fill="#8B1A1A"/>
+  <!-- Label text lines -->
+  <rect x="73" y="185" width="74" height="3" rx="1.5" fill="#8B1A1A" opacity="0.8"/>
+  <rect x="78" y="193" width="64" height="8" rx="2" fill="#6A1A06"/>
+  <rect x="73" y="207" width="74" height="2.5" rx="1" fill="#8B1A1A" opacity="0.7"/>
+  <rect x="80" y="214" width="60" height="5" rx="2" fill="#5A3010" opacity="0.6"/>
+  <rect x="76" y="225" width="68" height="2" rx="1" fill="#8B1A1A" opacity="0.5"/>
+  <rect x="73" y="232" width="74" height="3" rx="1.5" fill="#8B1A1A" opacity="0.6"/>
+  <rect x="78" y="240" width="64" height="6" rx="2" fill="#C8A000" opacity="0.7"/>
+  <!-- Label red stripe bottom -->
+  <rect x="67" y="268" width="86" height="12" rx="5" fill="#8B1A1A"/>
+
+  <!-- Bottom reflection -->
+  <ellipse cx="110" cy="510" rx="46" ry="8" fill="rgba(0,0,0,0.3)"/>
+  <ellipse cx="110" cy="508" rx="36" ry="5" fill="rgba(200,104,32,0.2)"/>
+</svg>

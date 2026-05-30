@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jugz Liquor and Wine — Alex AI Sommelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/kiosk.css?v=11">
+<script src="/static/js/vendor/three.min.js"></script>
+<script src="/static/js/vendor/GLTFLoader.js"></script>
+</head>
+<body>
+
+<!-- Full-bleed photo background that crossfades with slides -->
+<div class="bg-photos">
+  <div class="bg-photo bg-active" id="bgPhoto0" style="background-image:url('/static/assets/bg/whiskey.jpg')"></div>
+  <div class="bg-photo" id="bgPhoto1" style="background-image:url('/static/assets/bg/liquor-bar.jpg')"></div>
+  <div class="bg-photo" id="bgPhoto2" style="background-image:url('/static/assets/bg/wine.jpg')"></div>
+  <div class="bg-photo" id="bgPhoto3" style="background-image:url('/static/assets/bg/liquor-shelf.jpg')"></div>
+  <div class="bg-overlay"></div>
+</div>
+
+<div id="app">
+
+<!-- ═══ HOME ═══ -->
+<div id="screen-home" class="screen active">
+
+  <header class="hdr">
+    <div class="hdr-brand">
+      <div class="hdr-logo"><img src="/static/assets/logo.jpeg" alt="Jugz Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 18px rgba(139,26,26,.4)"></div>
+      <div><div class="hdr-name">Jugz Liquor and Wine</div><div class="hdr-sub">Joplin, MO</div></div>
+    </div>
+    <div class="hdr-r">
+      <span class="hdr-clock" id="clock"></span>
+      {% if user_role == 'admin' %}<a href="/admin" style="color:var(--gold);text-decoration:none;font-size:11px;padding:4px 10px;border:1px solid rgba(200,151,42,.2);border-radius:6px;margin-right:6px">⚙ Admin</a>{% endif %}
+      <a href="/logout" style="color:var(--tx2);text-decoration:none;font-size:11px;padding:4px 10px;border:1px solid var(--bd);border-radius:6px;margin-right:6px">Logout</a>
+      <span class="hdr-badge">21+</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-track" id="heroSlides">
+
+      <!-- Slide 1 — Whiskey glass (whiskey.jpg) -->
+      <div class="hero-slide active" data-bg="0">
+        <div class="slide-tint st-warm"></div>
+        <div class="slide-in">
+          <div class="slide-l">
+            <span class="s-pill">🏆 New Arrivals 2026</span>
+            <h1 class="s-h1">Premium<br><em>Bourbon &amp;</em><br>Whiskey</h1>
+            <p class="s-p">Hand-selected single barrels, rare allocations and world-class Scotch — curated by our experts.</p>
+            <div class="s-btns">
+              <button class="btn-g" onclick="goAlex('find')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explore Collection</button>
+              <button class="btn-o" onclick="goAlex()">Talk to Alex</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 — Spirits bar (liquor-bar.jpg) -->
+      <div class="hero-slide" data-bg="1">
+        <div class="slide-tint st-amber"></div>
+        <div class="slide-in">
+          <div class="slide-l">
+            <span class="s-pill">🌵 Premium Spirits</span>
+            <h1 class="s-h1">Discover<br><em>the World</em><br>of Spirits</h1>
+            <p class="s-p">Master tasting notes, distillation, wine regions and expert pairing guides from our collection.</p>
+            <div class="s-btns">
+              <button class="btn-g" onclick="goAlex('learn')">Start Learning</button>
+              <button class="btn-o" onclick="goAlex()">Ask Alex</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 — Wine pour (wine.jpg) -->
+      <div class="hero-slide" data-bg="2">
+        <div class="slide-tint st-rose"></div>
+        <div class="slide-in">
+          <div class="slide-l">
+            <span class="s-pill">🍷 Fine Wines</span>
+            <h1 class="s-h1">Curated<br><em>Wine</em><br>Selection</h1>
+            <p class="s-p">From bold reds to crisp rosés — explore our handpicked wine collection for every occasion.</p>
+            <div class="s-btns">
+              <button class="btn-g" onclick="goAlex('find')">Browse Wines</button>
+              <button class="btn-o" onclick="goAlex()">Ask Alex</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 — Liquor shelf (liquor-shelf.jpg) -->
+      <div class="hero-slide" data-bg="3">
+        <div class="slide-tint st-red"></div>
+        <div class="slide-in">
+          <div class="slide-l">
+            <span class="s-pill">🍹 Cocktail Recipes</span>
+            <h1 class="s-h1">Mix Like<br><em>a Pro</em><br>Bartender</h1>
+            <p class="s-p">From timeless classics to innovative craft creations — Alex knows them all.</p>
+            <div class="s-btns">
+              <button class="btn-g" onclick="goAlex('recipes')">View Recipes</button>
+              <button class="btn-o" onclick="goAlex()">Ask Alex</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button class="s-arr s-prev" onclick="prevSlide()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button class="s-arr s-next" onclick="nextSlide()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div class="s-dots"><button class="sdot active" onclick="goSlide(0)"></button><button class="sdot" onclick="goSlide(1)"></button><button class="sdot" onclick="goSlide(2)"></button><button class="sdot" onclick="goSlide(3)"></button></div>
+  </section>
+
+  <nav class="qnav">
+    <button class="qn" onclick="goAlex('find')"><span class="qn-ico">🍾</span><span class="qn-lbl">Products</span></button>
+    <button class="qn" onclick="goAlex('learn')"><span class="qn-ico">🎓</span><span class="qn-lbl">Learn</span></button>
+    <button class="qn" onclick="goAlex('recipes')"><span class="qn-ico">🍹</span><span class="qn-lbl">Recipes</span></button>
+    <button class="qn" onclick="goSearch()"><span class="qn-ico">🔍</span><span class="qn-lbl">Search</span></button>
+  </nav>
+
+  <div class="cta-bar">
+    <div class="cta-txt">Talk with <strong>Alex</strong>, your AI Sommelier</div>
+    <button class="btn-cta" onclick="goAlex()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chat Now</button>
+  </div>
+
+  <!-- Specials & Events loaded from store info -->
+  <div id="homeSpecials" class="home-promos" style="display:none">
+    <div class="promo-section" id="specialsSection" style="display:none">
+      <div class="promo-title">🏷️ Specials &amp; Deals</div>
+      <div class="promo-scroll" id="specialsCards"></div>
+    </div>
+    <div class="promo-section" id="eventsSection" style="display:none">
+      <div class="promo-title">📅 Upcoming Events</div>
+      <div class="promo-scroll" id="eventsCards"></div>
+    </div>
+  </div>
+
+  <div class="footer-bar">⚠︎ Must be 21+ to purchase alcohol &nbsp;·&nbsp; Please drink responsibly</div>
+</div>
+
+<!-- ═══ ALEX SCREEN ═══ -->
+<div id="screen-alex" class="screen">
+  <div class="alex-layout">
+    <aside class="av-panel" id="avPanel">
+      <div class="av-bg"></div>
+      <div class="av-grid"></div>
+      <div class="rings" id="rings"><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
+      <div class="av-nameplate"><div class="av-np-name">Alex</div><div class="av-np-role">AI Sommelier</div></div>
+      <div class="av-bubble" id="bubble">
+        <div class="av-blabel">Alex</div>
+        <p class="av-btext" id="bubbleText">Hi! Ask me anything about spirits, cocktails or products.</p>
+        <div class="typing-dots" id="typingDots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="av-emo" id="emoBadge">😊</div>
+      <button class="av-back" onclick="goHome()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>Home</button>
+    </aside>
+
+    <main class="chat-panel">
+      <div class="stat-bar">
+        <div class="stat-l"><div class="stat-dot idle" id="voiceDot"></div><span id="voiceLabel">Ready</span></div>
+        <button class="stop-btn" onclick="stopSpeak()"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>Stop</button>
+      </div>
+      <div class="messages" id="messages">
+        <div class="msg msg-alex"><div class="msg-av">A</div><div class="msg-body">Hey there! I'm Alex, your personal liquor expert. I can help you find the perfect bottle, teach you about any spirit, or walk you through cocktail recipes. What can I do for you today?</div></div>
+      </div>
+      <div class="cat-sec" id="catSelector">
+        <p class="cat-hd">What can I help you with?</p>
+        <div class="cat-row">
+          <button class="cat-card" onclick="selectCat('find')" id="cat-find"><span class="cc-ico">🍾</span><span class="cc-lbl">Find Products</span></button>
+          <button class="cat-card" onclick="selectCat('learn')" id="cat-learn"><span class="cc-ico">🎓</span><span class="cc-lbl">Liquor University</span></button>
+          <button class="cat-card" onclick="selectCat('recipes')" id="cat-recipes"><span class="cc-ico">🍹</span><span class="cc-lbl">Cocktail Recipes</span></button>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="input-dock">
+        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Push to talk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg></button>
+        <button class="mic-btn continuous-btn" id="continuousBtn" onclick="toggleContinuousMode()" title="Continuous Listening OFF" style="font-size:11px;width:36px;height:36px;">∞</button>
+        <input id="chatInput" class="chat-inp" placeholder="Ask Alex anything…" onkeydown="handleKey(event)" autocomplete="off">
+        <button class="send-btn" onclick="sendMessage()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+      <div class="t-bar" id="transcriptBar">
+        <div class="t-wave"><span></span><span></span><span></span><span></span><span></span></div>
+        <span id="transcriptText">Listening…</span>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ═══ CATALOG ═══ -->
+<div id="screen-catalog" class="screen">
+  <div class="cat-shell">
+    <header class="cat-hdr">
+      <button class="back-pill" onclick="goAlex()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+      <h2 class="cat-title" id="catalogTitle">Product Catalog</h2>
+      <div class="csw"><svg class="cs-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="catalogSearch" class="cat-search" placeholder="Search…" oninput="filterCatalog()"></div>
+    </header>
+    <div class="filter-bar" id="catalogFilter">
+      <button class="fc active" onclick="setCatFilter('',this)">All</button>
+      <button class="fc" onclick="setCatFilter('Bourbon',this)">Bourbon</button>
+      <button class="fc" onclick="setCatFilter('Scotch',this)">Scotch</button>
+      <button class="fc" onclick="setCatFilter('Tequila',this)">Tequila</button>
+      <button class="fc" onclick="setCatFilter('Gin',this)">Gin</button>
+      <button class="fc" onclick="setCatFilter('Vodka',this)">Vodka</button>
+      <button class="fc" onclick="setCatFilter('Rum',this)">Rum</button>
+      <button class="fc" onclick="setCatFilter('Wine',this)">Wine</button>
+    </div>
+    <div class="prod-grid" id="catalogGrid"></div>
+  </div>
+</div>
+</div>
+
+<!-- Modals -->
+<div id="modal" class="modal-bd" onclick="closeModal(event)">
+  <div class="modal-sheet"><button class="modal-x" onclick="closeModalBtn()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button><div id="modalContent"></div><button class="modal-cta" onclick="askAboutProduct()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Ask Alex about this</button></div>
+</div>
+<div id="recipeModal" class="modal-bd" onclick="closeRecipeModal(event)">
+  <div class="modal-sheet modal-lg"><button class="modal-x" onclick="closeRecipeModalBtn()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button><div id="recipeModalContent"></div></div>
+</div>
+
+<script>
+/* Session check — detect if kicked by another login */
+setInterval(async () => {
+  try {
+    const res = await fetch('/api/session-check');
+    if (res.status === 401) {
+      alert('Your session has expired — you may have logged in from another device.');
+      window.location.href = '/login';
+    }
+  } catch(e) {}
+}, 30000);
+</script>
+<script src="/static/js/avatar.js?v=11"></script>
+<script src="/static/js/app.js?v=11"></script>
+</body>
+</html>
