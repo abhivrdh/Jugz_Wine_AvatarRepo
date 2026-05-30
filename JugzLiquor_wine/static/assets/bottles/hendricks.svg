@@ -1,0 +1,63 @@
+<svg viewBox="0 0 240 500" xmlns="http://www.w3.org/2000/svg" width="240" height="500">
+  <defs>
+    <radialGradient id="henbody" cx="35%" cy="40%">
+      <stop offset="0%" stop-color="#1A1A2A"/>
+      <stop offset="60%" stop-color="#0E0E1C"/>
+      <stop offset="100%" stop-color="#060610"/>
+    </radialGradient>
+    <linearGradient id="henshine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="35%" stop-color="rgba(255,255,255,0.22)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <linearGradient id="henlabel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0E8D0"/>
+      <stop offset="100%" stop-color="#D8CCAA"/>
+    </linearGradient>
+    <linearGradient id="hencap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1A1A0A"/>
+      <stop offset="50%" stop-color="#3A3A18"/>
+      <stop offset="100%" stop-color="#121208"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Round Hendrick's body - very distinctive spherical lower half -->
+  <path d="M40,440 Q32,470 40,480 Q120,500 200,480 Q208,470 200,440 L195,280 Q192,240 185,210 L175,100 Q173,70 120,62 Q67,70 65,100 L55,210 Q48,240 45,280 Z" fill="url(#henbody)"/>
+
+  <!-- Wide round belly -->
+  <ellipse cx="120" cy="380" rx="80" ry="75" fill="url(#henbody)"/>
+
+  <!-- Shine on round body -->
+  <path d="M58,260 Q62,180 68,105 L72,72" stroke="url(#henshine)" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <!-- Secondary shine -->
+  <ellipse cx="85" cy="350" rx="20" ry="40" fill="rgba(255,255,255,0.05)"/>
+
+  <!-- Neck - shorter -->
+  <path d="M65,100 Q64,50 68,35 Q120,22 172,35 Q176,50 175,100" fill="url(#henbody)"/>
+
+  <!-- Wax/cap - Hendrick's style dark -->
+  <path d="M68,35 Q70,18 120,14 Q170,18 172,35 Q165,46 120,48 Q75,46 68,35z" fill="url(#hencap)"/>
+  <rect x="82" y="14" width="76" height="14" rx="5" fill="#2A2A10"/>
+
+  <!-- Label - round centered -->
+  <rect x="45" y="195" width="150" height="175" rx="8" fill="url(#henlabel)" stroke="#2A2A10" stroke-width="2"/>
+
+  <!-- Black top/bottom bands -->
+  <rect x="45" y="195" width="150" height="15" rx="7" fill="#1A1A10"/>
+  <rect x="45" y="355" width="150" height="15" rx="7" fill="#1A1A10"/>
+
+  <!-- Label details -->
+  <rect x="54" y="218" width="132" height="3" rx="1.5" fill="#2A2A10"/>
+  <rect x="58" y="227" width="124" height="12" rx="3" fill="#2A2A10" opacity="0.8"/>
+  <rect x="54" y="246" width="132" height="2.5" rx="1" fill="#2A2A10" opacity="0.6"/>
+  <!-- Hendrick's portrait/crest oval -->
+  <ellipse cx="120" cy="293" rx="36" ry="42" fill="none" stroke="#2A2A10" stroke-width="1.5" opacity="0.7"/>
+  <ellipse cx="120" cy="293" rx="30" ry="35" fill="#1A1A10" opacity="0.12"/>
+  <!-- Decorative lines in oval -->
+  <rect x="100" y="278" width="40" height="30" rx="3" fill="none" stroke="#2A2A10" stroke-width="1" opacity="0.5"/>
+  <path d="M108,288 Q120,275 132,288" fill="none" stroke="#2A2A10" stroke-width="1" opacity="0.5"/>
+  <rect x="54" y="340" width="132" height="2" rx="1" fill="#2A2A10" opacity="0.6"/>
+
+  <!-- Shadow -->
+  <ellipse cx="120" cy="478" rx="65" ry="9" fill="rgba(0,0,0,0.4)"/>
+</svg>

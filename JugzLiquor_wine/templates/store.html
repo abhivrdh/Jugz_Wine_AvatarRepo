@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Store Info — Jugz Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C8972A;--gold-l:#E8B84B;--bg:#0a0604;--card:rgba(22,14,8,.85);--bd:rgba(200,151,42,.12);--tx:#f0e6d6;--tx2:rgba(240,230,214,.5);--red:#ef4444;--green:#4ade80}
+html,body{min-height:100%;font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg)}
+body{background:linear-gradient(175deg,rgba(10,6,4,1) 0%,rgba(20,12,6,.98) 100%)}
+.bg-img{position:fixed;inset:0;background:url('/static/assets/bg/liquor-shelf.jpg') center/cover no-repeat;opacity:0.04;pointer-events:none}
+.container{position:relative;max-width:760px;margin:0 auto;padding:20px 16px 40px}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+.top-left{display:flex;align-items:center;gap:10px}
+.top-left img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.top-left h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-l)}
+.top-links{display:flex;gap:8px;flex-wrap:wrap}
+.top-links a{color:var(--tx2);text-decoration:none;font-size:12px;padding:6px 14px;border:1px solid var(--bd);border-radius:8px;transition:all .2s}
+.top-links a:hover{border-color:var(--gold);color:var(--gold-l)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:24px;margin-bottom:20px;backdrop-filter:blur(10px)}
+.card h3{font-size:13px;color:var(--gold-l);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.field input,.field textarea{padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:80px}
+.hours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.hour-field{display:flex;flex-direction:column;gap:3px}
+.hour-field label{font-size:10px;color:var(--tx2);text-transform:uppercase}
+.hour-field input{padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:12px;font-family:'DM Sans',sans-serif;outline:none}
+.btn-gold{padding:10px 24px;background:linear-gradient(135deg,var(--gold),var(--gold-l));border:none;border-radius:8px;color:#1a0e06;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:16px}
+.btn-gold:hover{opacity:.9}
+.btn-gold:disabled{opacity:.5;cursor:not-allowed}
+.msg{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none}
+.msg.error{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red)}
+.msg.success{display:block;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--green)}
+.item-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd)}
+.item-row:last-child{border-bottom:none}
+.item-info{flex:1}
+.item-title{font-weight:500;font-size:13px}
+.item-sub{font-size:11px;color:var(--tx2);margin-top:2px}
+.btn-del{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-del:hover{background:rgba(239,68,68,.2)}
+.add-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.add-row input{flex:1;min-width:120px;padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:12px;font-family:'DM Sans',sans-serif;outline:none}
+.add-row input:focus{border-color:var(--gold)}
+.btn-add{padding:8px 16px;background:linear-gradient(135deg,var(--gold),var(--gold-l));border:none;border-radius:6px;color:#1a0e06;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.empty{color:var(--tx2);font-size:12px;padding:12px 0}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}.hours-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="bg-img"></div>
+<div class="container">
+  <div class="top-bar">
+    <div class="top-left"><img src="/static/assets/logo.jpeg" alt=""><h1>🏪 Store Info</h1></div>
+    <div class="top-links">
+      <a href="/admin">← Admin</a>
+      <a href="/admin/inventory">📦 Inventory</a>
+      <a href="/">🏠 App</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <!-- Store Details -->
+  <div class="card">
+    <h3>🏪 Store Details</h3>
+    <div class="msg" id="storeMsg"></div>
+    <div class="form-grid">
+      <div class="field"><label>Store Name</label><input type="text" id="sName"></div>
+      <div class="field"><label>Phone</label><input type="text" id="sPhone" placeholder="(417) 555-1234"></div>
+      <div class="field full"><label>Address</label><input type="text" id="sAddress"></div>
+      <div class="field full"><label>Policies (returns, delivery, tastings, etc.)</label><textarea id="sPolicies" placeholder="e.g. Returns accepted within 7 days with receipt. Free local delivery on orders over $50."></textarea></div>
+    </div>
+    <button class="btn-gold" onclick="saveStore()">Save Store Details</button>
+  </div>
+
+  <!-- Hours -->
+  <div class="card">
+    <h3>🕐 Store Hours</h3>
+    <div class="hours-grid">
+      <div class="hour-field"><label>Monday</label><input type="text" id="hMon" placeholder="9AM-9PM"></div>
+      <div class="hour-field"><label>Tuesday</label><input type="text" id="hTue" placeholder="9AM-9PM"></div>
+      <div class="hour-field"><label>Wednesday</label><input type="text" id="hWed" placeholder="9AM-9PM"></div>
+      <div class="hour-field"><label>Thursday</label><input type="text" id="hThu" placeholder="9AM-9PM"></div>
+      <div class="hour-field"><label>Friday</label><input type="text" id="hFri" placeholder="9AM-10PM"></div>
+      <div class="hour-field"><label>Saturday</label><input type="text" id="hSat" placeholder="9AM-10PM"></div>
+      <div class="hour-field"><label>Sunday</label><input type="text" id="hSun" placeholder="12PM-6PM"></div>
+    </div>
+    <button class="btn-gold" onclick="saveStore()">Save Hours</button>
+  </div>
+
+  <!-- Specials -->
+  <div class="card">
+    <h3>🏷️ Specials &amp; Deals</h3>
+    <div id="specialsList"></div>
+    <div class="add-row">
+      <input type="text" id="specTitle" placeholder="Deal title (e.g. Weekend Special)">
+      <input type="text" id="specDesc" placeholder="Description (e.g. 10% off all bourbon)">
+      <input type="date" id="specExpires" title="Expires on">
+      <button class="btn-add" onclick="addSpecial()">Add</button>
+    </div>
+  </div>
+
+  <!-- Events -->
+  <div class="card">
+    <h3>📅 Upcoming Events</h3>
+    <div id="eventsList"></div>
+    <div class="add-row">
+      <input type="text" id="evtTitle" placeholder="Event name">
+      <input type="date" id="evtDate">
+      <input type="text" id="evtDesc" placeholder="Description">
+      <button class="btn-add" onclick="addEvent()">Add</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let storeData = {};
+
+async function load() {
+  try {
+    const res = await fetch('/api/admin/store');
+    storeData = await res.json();
+    document.getElementById('sName').value = storeData.name || '';
+    document.getElementById('sAddress').value = storeData.address || '';
+    document.getElementById('sPhone').value = storeData.phone || '';
+    document.getElementById('sPolicies').value = storeData.policies || '';
+    const h = storeData.hours || {};
+    document.getElementById('hMon').value = h.mon || '';
+    document.getElementById('hTue').value = h.tue || '';
+    document.getElementById('hWed').value = h.wed || '';
+    document.getElementById('hThu').value = h.thu || '';
+    document.getElementById('hFri').value = h.fri || '';
+    document.getElementById('hSat').value = h.sat || '';
+    document.getElementById('hSun').value = h.sun || '';
+    renderSpecials();
+    renderEvents();
+  } catch(e) { console.error(e); }
+}
+
+function showMsg(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.className = 'msg ' + type;
+  setTimeout(() => { el.className = 'msg'; }, 3000);
+}
+
+async function saveStore() {
+  const data = {
+    name: document.getElementById('sName').value.trim(),
+    address: document.getElementById('sAddress').value.trim(),
+    phone: document.getElementById('sPhone').value.trim(),
+    policies: document.getElementById('sPolicies').value.trim(),
+    hours: {
+      mon: document.getElementById('hMon').value.trim(),
+      tue: document.getElementById('hTue').value.trim(),
+      wed: document.getElementById('hWed').value.trim(),
+      thu: document.getElementById('hThu').value.trim(),
+      fri: document.getElementById('hFri').value.trim(),
+      sat: document.getElementById('hSat').value.trim(),
+      sun: document.getElementById('hSun').value.trim(),
+    }
+  };
+  try {
+    const res = await fetch('/api/admin/store', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+    if (res.ok) showMsg('storeMsg', 'Store info saved!', 'success');
+    else showMsg('storeMsg', 'Failed to save', 'error');
+  } catch(e) { showMsg('storeMsg', 'Connection error', 'error'); }
+}
+
+function renderSpecials() {
+  const list = storeData.specials || [];
+  const el = document.getElementById('specialsList');
+  if (!list.length) { el.innerHTML = '<p class="empty">No active specials. Add one below.</p>'; return; }
+  el.innerHTML = list.map(s => `<div class="item-row"><div class="item-info"><div class="item-title">${esc(s.title)}</div><div class="item-sub">${esc(s.description)}${s.expires ? ' · Expires: '+s.expires : ''}</div></div><button class="btn-del" onclick="delSpecial('${s.id}')">Remove</button></div>`).join('');
+}
+
+function renderEvents() {
+  const list = storeData.events || [];
+  const el = document.getElementById('eventsList');
+  if (!list.length) { el.innerHTML = '<p class="empty">No upcoming events. Add one below.</p>'; return; }
+  el.innerHTML = list.map(e => `<div class="item-row"><div class="item-info"><div class="item-title">${esc(e.title)}</div><div class="item-sub">${e.date ? e.date+' · ' : ''}${esc(e.description)}</div></div><button class="btn-del" onclick="delEvent('${e.id}')">Remove</button></div>`).join('');
+}
+
+async function addSpecial() {
+  const title = document.getElementById('specTitle').value.trim();
+  const desc = document.getElementById('specDesc').value.trim();
+  const expires = document.getElementById('specExpires').value;
+  if (!title) return;
+  await fetch('/api/admin/store/specials', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({title,description:desc,expires}) });
+  document.getElementById('specTitle').value=''; document.getElementById('specDesc').value=''; document.getElementById('specExpires').value='';
+  load();
+}
+
+async function delSpecial(id) {
+  if (!confirm('Remove this special?')) return;
+  await fetch(`/api/admin/store/specials/${id}`, {method:'DELETE'});
+  load();
+}
+
+async function addEvent() {
+  const title = document.getElementById('evtTitle').value.trim();
+  const date = document.getElementById('evtDate').value;
+  const desc = document.getElementById('evtDesc').value.trim();
+  if (!title) return;
+  await fetch('/api/admin/store/events', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({title,date,description:desc}) });
+  document.getElementById('evtTitle').value=''; document.getElementById('evtDate').value=''; document.getElementById('evtDesc').value='';
+  load();
+}
+
+async function delEvent(id) {
+  if (!confirm('Remove this event?')) return;
+  await fetch(`/api/admin/store/events/${id}`, {method:'DELETE'});
+  load();
+}
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+load();
+</script>
+</body>
+</html>

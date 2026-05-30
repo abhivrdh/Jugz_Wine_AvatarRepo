@@ -1,0 +1,68 @@
+<svg viewBox="0 0 200 580" xmlns="http://www.w3.org/2000/svg" width="200" height="580">
+  <defs>
+    <linearGradient id="moetbody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0A2008"/>
+      <stop offset="20%" stop-color="#1C4A18"/>
+      <stop offset="50%" stop-color="#246020"/>
+      <stop offset="80%" stop-color="#1A4416"/>
+      <stop offset="100%" stop-color="#081808"/>
+    </linearGradient>
+    <linearGradient id="moetneck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0A1E08"/>
+      <stop offset="50%" stop-color="#1C3C18"/>
+      <stop offset="100%" stop-color="#081608"/>
+    </linearGradient>
+    <linearGradient id="moetfoil" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7A6800"/>
+      <stop offset="50%" stop-color="#C8A800"/>
+      <stop offset="100%" stop-color="#6A5A00"/>
+    </linearGradient>
+    <linearGradient id="moetlabel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F8F0D8"/>
+      <stop offset="100%" stop-color="#E8D8A8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Champagne body -->
+  <path d="M50,525 Q43,555 50,564 Q100,580 150,564 Q157,555 150,525 L145,230 Q143,195 137,170 L130,80 Q128,50 100,44 Q72,50 70,80 L63,170 Q57,195 55,230 Z" fill="url(#moetbody)"/>
+
+  <!-- Shine -->
+  <path d="M58,200 Q62,128 68,84 L72,52" stroke="rgba(255,255,255,0.18)" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck - long champagne neck -->
+  <path d="M70,80 Q69,28 72,14 Q100,4 128,14 Q131,28 130,80" fill="url(#moetneck)"/>
+
+  <!-- Gold foil cap -->
+  <path d="M72,35 Q72,14 100,8 Q128,14 128,35 L122,48 Q100,54 78,48 Z" fill="url(#moetfoil)"/>
+  <path d="M78,48 Q100,56 122,48 Q118,60 100,62 Q82,60 78,48z" fill="#B09000"/>
+  <!-- Cork top -->
+  <rect x="88" y="4" width="24" height="12" rx="6" fill="#D4C090"/>
+
+  <!-- Gold cage (muselet) lines -->
+  <path d="M72,38 Q100,48 128,38" fill="none" stroke="#C8A000" stroke-width="1" opacity="0.6"/>
+  <path d="M74,44 Q100,52 126,44" fill="none" stroke="#C8A000" stroke-width="1" opacity="0.5"/>
+
+  <!-- Label area -->
+  <rect x="50" y="190" width="100" height="220" rx="5" fill="url(#moetlabel)" stroke="#8B6800" stroke-width="1.5"/>
+
+  <!-- Gold top/bottom bands on label -->
+  <rect x="50" y="190" width="100" height="14" rx="5" fill="#8B6800"/>
+  <rect x="50" y="396" width="100" height="14" rx="5" fill="#8B6800"/>
+
+  <!-- Label content -->
+  <rect x="56" y="212" width="88" height="2.5" rx="1" fill="#6A4A00"/>
+  <rect x="60" y="220" width="80" height="16" rx="3" fill="#8B6800" opacity="0.8"/>
+  <rect x="56" y="242" width="88" height="2" rx="1" fill="#6A4A00" opacity="0.7"/>
+  <!-- Chandon crest oval -->
+  <ellipse cx="100" cy="295" rx="32" ry="38" fill="none" stroke="#8B6800" stroke-width="1.5" opacity="0.65"/>
+  <ellipse cx="100" cy="295" rx="26" ry="30" fill="none" stroke="#8B6800" stroke-width="0.8" opacity="0.4"/>
+  <!-- Star/crest elements -->
+  <path d="M94,280 L100,270 L106,280 L116,280 L108,287 L112,298 L100,291 L88,298 L92,287 L84,280 Z" fill="none" stroke="#8B6800" stroke-width="1" opacity="0.5"/>
+  <rect x="58" y="344" width="84" height="2.5" rx="1" fill="#6A4A00" opacity="0.7"/>
+  <rect x="62" y="352" width="76" height="6" rx="2" fill="#6A4A00" opacity="0.5"/>
+  <rect x="58" y="364" width="84" height="2" rx="1" fill="#6A4A00" opacity="0.6"/>
+  <rect x="56" y="374" width="88" height="3" rx="1.5" fill="#8B6800" opacity="0.7"/>
+
+  <!-- Bottom shadow -->
+  <ellipse cx="100" cy="562" rx="48" ry="8" fill="rgba(0,0,0,0.4)"/>
+</svg>

@@ -1,0 +1,74 @@
+<svg viewBox="0 0 200 560" xmlns="http://www.w3.org/2000/svg" width="200" height="560">
+  <defs>
+    <linearGradient id="djbody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="20%" stop-color="#2E2E4A"/>
+      <stop offset="50%" stop-color="#3A3A5C"/>
+      <stop offset="80%" stop-color="#28284A"/>
+      <stop offset="100%" stop-color="#12122A"/>
+    </linearGradient>
+    <linearGradient id="djneck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#141428"/>
+      <stop offset="50%" stop-color="#2A2A48"/>
+      <stop offset="100%" stop-color="#101022"/>
+    </linearGradient>
+    <linearGradient id="djlabel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C8A820"/>
+      <stop offset="50%" stop-color="#E8C840"/>
+      <stop offset="100%" stop-color="#A88010"/>
+    </linearGradient>
+    <linearGradient id="djcap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6A5000"/>
+      <stop offset="50%" stop-color="#C8A800"/>
+      <stop offset="100%" stop-color="#4A3800"/>
+    </linearGradient>
+    <linearGradient id="djliquid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(200,160,40,0)" />
+      <stop offset="50%" stop-color="rgba(220,180,60,0.18)"/>
+      <stop offset="100%" stop-color="rgba(200,160,40,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Bottle body - tall and distinctive DJ1942 shape -->
+  <path d="M55,500 Q48,530 55,540 Q100,558 145,540 Q152,530 145,500 L140,220 Q138,190 133,168 L128,80 Q126,55 100,50 Q74,55 72,80 L67,168 Q62,190 60,220 Z" fill="url(#djbody)"/>
+
+  <!-- Inner liquid tint -->
+  <path d="M63,230 L137,230 L137,500 Q100,515 63,500 Z" fill="rgba(200,160,20,0.08)"/>
+
+  <!-- Bottle shine highlight -->
+  <path d="M68,200 Q70,130 75,85 L78,58" stroke="rgba(255,255,255,0.18)" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M130,200 Q132,150 130,100" stroke="rgba(255,255,255,0.06)" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Neck -->
+  <path d="M72,80 Q71,30 74,15 Q100,5 126,15 Q129,30 128,80" fill="url(#djneck)"/>
+
+  <!-- Cap - distinctive angled DJ cap -->
+  <path d="M74,15 Q75,2 100,0 Q125,2 126,15 Q120,22 100,24 Q80,22 74,15z" fill="url(#djcap)"/>
+  <rect x="78" y="0" width="44" height="10" rx="3" fill="#D4B000"/>
+
+  <!-- Label area - large gold label -->
+  <rect x="55" y="190" width="90" height="200" rx="5" fill="#1A1A30" stroke="url(#djlabel)" stroke-width="2"/>
+
+  <!-- Label gold border inner -->
+  <rect x="60" y="196" width="80" height="188" rx="3" fill="none" stroke="#C8A000" stroke-width="1" opacity="0.5"/>
+
+  <!-- 1942 large text representation -->
+  <rect x="62" y="200" width="76" height="3" rx="1.5" fill="#C8A820"/>
+  <rect x="65" y="210" width="70" height="22" rx="3" fill="#C8A820" opacity="0.9"/>
+  <rect x="62" y="238" width="76" height="2" rx="1" fill="#C8A820"/>
+  <rect x="68" y="246" width="64" height="6" rx="2" fill="#C8A820" opacity="0.7"/>
+  <rect x="62" y="258" width="76" height="2" rx="1" fill="#C8A820"/>
+  <rect x="70" y="266" width="60" height="4" rx="1.5" fill="#E8D080" opacity="0.8"/>
+  <rect x="68" y="276" width="64" height="3" rx="1.5" fill="#C8A820" opacity="0.6"/>
+  <!-- Agave plant graphic area -->
+  <ellipse cx="100" cy="310" rx="28" ry="20" fill="none" stroke="#C8A820" stroke-width="1" opacity="0.4"/>
+  <path d="M100,298 Q95,308 100,320 Q105,308 100,298z" fill="#C8A820" opacity="0.4"/>
+  <path d="M88,310 Q96,305 108,312" fill="none" stroke="#C8A820" stroke-width="1" opacity="0.4"/>
+  <rect x="68" y="336" width="64" height="3" rx="1.5" fill="#C8A820" opacity="0.6"/>
+  <rect x="65" y="346" width="70" height="5" rx="2" fill="#C8A820" opacity="0.8"/>
+  <rect x="68" y="358" width="64" height="2" rx="1" fill="#C8A820" opacity="0.5"/>
+  <rect x="62" y="365" width="76" height="3" rx="1.5" fill="#C8A820"/>
+
+  <!-- Bottom emboss -->
+  <ellipse cx="100" cy="540" rx="42" ry="7" fill="rgba(0,0,0,0.4)"/>
+</svg>

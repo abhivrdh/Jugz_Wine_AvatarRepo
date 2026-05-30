@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Jugz Liquor and Wine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C8972A;--gold-l:#E8B84B;--bg:#0a0604;--card:rgba(22,14,8,.85);--bd:rgba(200,151,42,.12);--tx:#f0e6d6;--tx2:rgba(240,230,214,.5);--red:#ef4444;--green:#4ade80}
+html,body{height:100%;font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg)}
+body{background:linear-gradient(175deg,rgba(10,6,4,1) 0%,rgba(20,12,6,.98) 100%)}
+.bg-img{position:fixed;inset:0;background:url('/static/assets/bg/liquor-shelf.jpg') center/cover no-repeat;opacity:0.05;pointer-events:none}
+.container{position:relative;max-width:720px;margin:0 auto;padding:24px 20px}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.top-left{display:flex;align-items:center;gap:12px}
+.top-left img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.top-left h1{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold-l)}
+.top-links{display:flex;gap:10px}
+.top-links a{color:var(--tx2);text-decoration:none;font-size:13px;padding:8px 16px;border:1px solid var(--bd);border-radius:8px;transition:all .2s}
+.top-links a:hover{border-color:var(--gold);color:var(--gold-l)}
+.section-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:20px;color:var(--tx)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:28px;margin-bottom:24px;backdrop-filter:blur(10px)}
+.card h3{font-size:14px;color:var(--gold-l);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
+.user-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--bd)}
+.user-row:last-child{border-bottom:none}
+.user-info{display:flex;align-items:center;gap:12px}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-l));display:flex;align-items:center;justify-content:center;color:#1a0e06;font-weight:600;font-size:14px;text-transform:uppercase}
+.user-name{font-weight:500;font-size:14px}
+.user-role{font-size:11px;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;font-weight:500}
+.role-admin{background:rgba(200,151,42,.15);color:var(--gold-l)}
+.role-staff{background:rgba(255,255,255,.06);color:var(--tx2)}
+.user-date{font-size:11px;color:var(--tx2)}
+.btn-del{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);padding:6px 14px;border-radius:8px;font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.btn-del:hover{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4)}
+.add-form{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.add-field{flex:1;min-width:140px}
+.add-field label{display:block;font-size:11px;color:var(--tx2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.add-field input,.add-field select{width:100%;padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
+.add-field input:focus,.add-field select:focus{border-color:var(--gold)}
+.add-field select option{background:#1a0e06;color:var(--tx)}
+.btn-add{padding:10px 20px;background:linear-gradient(135deg,var(--gold),var(--gold-l));border:none;border-radius:8px;color:#1a0e06;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:opacity .2s}
+.btn-add:hover{opacity:.9}
+.btn-add:disabled{opacity:.5;cursor:not-allowed}
+.msg{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+.msg.error{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red)}
+.msg.success{display:block;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--green)}
+.empty{text-align:center;color:var(--tx2);padding:24px;font-size:13px}
+.loading{text-align:center;color:var(--tx2);padding:24px;font-size:13px}
+@media(max-width:480px){
+  .add-form{flex-direction:column}
+  .add-field{min-width:100%}
+  .user-date{display:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-img"></div>
+<div class="container">
+  <div class="top-bar">
+    <div class="top-left">
+      <img src="/static/assets/logo.jpeg" alt="Jugz">
+      <h1>Admin Panel</h1>
+    </div>
+    <div class="top-links">
+      <a href="/admin/inventory">📦 Inventory</a>
+      <a href="/admin/store">🏪 Store Info</a>
+      <a href="/">← Back to App</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>➕ Add New User</h3>
+    <div class="msg" id="addMsg"></div>
+    <div class="add-form">
+      <div class="add-field">
+        <label>Username</label>
+        <input type="text" id="newUser" placeholder="username">
+      </div>
+      <div class="add-field">
+        <label>Password</label>
+        <input type="password" id="newPass" placeholder="min 6 chars">
+      </div>
+      <div class="add-field" style="max-width:120px">
+        <label>Role</label>
+        <select id="newRole"><option value="staff">Staff</option><option value="admin">Admin</option></select>
+      </div>
+      <button class="btn-add" id="addBtn" onclick="addUser()">Add User</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>👥 Users</h3>
+    <div id="userList"><p class="loading">Loading users…</p></div>
+  </div>
+</div>
+<script>
+async function loadUsers() {
+  const el = document.getElementById('userList');
+  try {
+    const res = await fetch('/api/admin/users');
+    if (!res.ok) { el.innerHTML = '<p class="empty">Failed to load users</p>'; return; }
+    const users = await res.json();
+    if (!users.length) { el.innerHTML = '<p class="empty">No users found</p>'; return; }
+    el.innerHTML = users.map(u => {
+      const date = u.created ? new Date(u.created * 1000).toLocaleDateString() : '';
+      const initials = u.username.substring(0, 2);
+      return `<div class="user-row">
+        <div class="user-info">
+          <div class="user-avatar">${initials}</div>
+          <div>
+            <div class="user-name">${u.username}</div>
+            <span class="user-role ${u.role === 'admin' ? 'role-admin' : 'role-staff'}">${u.role}</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="user-date">${date}</span>
+          <button class="btn-del" onclick="deleteUser('${u.username}')">Remove</button>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML = '<p class="empty">Error loading users</p>'; }
+}
+
+function showMsg(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.className = 'msg ' + type;
+  setTimeout(() => { el.className = 'msg'; }, 4000);
+}
+
+async function addUser() {
+  const username = document.getElementById('newUser').value.trim();
+  const password = document.getElementById('newPass').value;
+  const role = document.getElementById('newRole').value;
+  if (!username || !password) { showMsg('addMsg', 'Username and password required', 'error'); return; }
+  const btn = document.getElementById('addBtn');
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/admin/users', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password, role})
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showMsg('addMsg', `User "${username}" created successfully`, 'success');
+      document.getElementById('newUser').value = '';
+      document.getElementById('newPass').value = '';
+      loadUsers();
+    } else { showMsg('addMsg', data.error || 'Failed to add user', 'error'); }
+  } catch(e) { showMsg('addMsg', 'Connection error', 'error'); }
+  btn.disabled = false;
+}
+
+async function deleteUser(username) {
+  if (!confirm(`Remove user "${username}"? This will also end their active session.`)) return;
+  try {
+    const res = await fetch(`/api/admin/users/${username}`, {method: 'DELETE'});
+    const data = await res.json();
+    if (res.ok) { loadUsers(); }
+    else { alert(data.error || 'Failed to delete user'); }
+  } catch(e) { alert('Connection error'); }
+}
+
+loadUsers();
+</script>
+</body>
+</html>

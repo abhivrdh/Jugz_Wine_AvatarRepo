@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Setup — Jugz Liquor and Wine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C8972A;--gold-l:#E8B84B;--bg:#0a0604;--card:rgba(22,14,8,.85);--bd:rgba(200,151,42,.12);--tx:#f0e6d6;--tx2:rgba(240,230,214,.5);--green:#4ade80}
+html,body{height:100%;font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg)}
+body{display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(10,6,4,1) 0%,rgba(30,15,8,.95) 50%,rgba(10,6,4,1) 100%)}
+.bg-img{position:fixed;inset:0;background:url('/static/assets/bg/whiskey.jpg') center/cover no-repeat;opacity:0.08;pointer-events:none}
+.setup-card{position:relative;width:100%;max-width:440px;padding:48px 40px;background:var(--card);border:1px solid var(--bd);border-radius:20px;backdrop-filter:blur(20px);box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.logo-row{display:flex;align-items:center;gap:14px;margin-bottom:28px;justify-content:center}
+.logo-row img{width:52px;height:52px;border-radius:50%;object-fit:cover;box-shadow:0 0 20px rgba(200,151,42,.3)}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-l);font-weight:700}
+.logo-text p{font-size:11px;color:var(--tx2);letter-spacing:1.5px;text-transform:uppercase}
+.setup-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-l));color:#1a0e06;font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.form-title{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:8px}
+.form-sub{text-align:center;color:var(--tx2);font-size:13px;margin-bottom:32px;line-height:1.5}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;color:var(--tx2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.field input{width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--gold)}
+.field input::placeholder{color:var(--tx2)}
+.field .hint{font-size:11px;color:var(--tx2);margin-top:4px}
+.btn-setup{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-l));border:none;border-radius:12px;color:#1a0e06;font-size:15px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .1s;margin-top:8px}
+.btn-setup:hover{opacity:.9}
+.btn-setup:active{transform:scale(.98)}
+.btn-setup:disabled{opacity:.5;cursor:not-allowed}
+.error-msg{background:rgba(200,40,40,.15);border:1px solid rgba(200,40,40,.3);border-radius:10px;padding:12px 16px;color:#ff6b6b;font-size:13px;margin-bottom:20px;display:none;text-align:center}
+.error-msg.show{display:block}
+.info-box{background:rgba(200,151,42,.08);border:1px solid rgba(200,151,42,.2);border-radius:10px;padding:14px 16px;margin-bottom:24px;font-size:12px;color:var(--tx2);line-height:1.6}
+.info-box strong{color:var(--gold-l)}
+@media(max-width:480px){.setup-card{margin:16px;padding:36px 24px}.form-title{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="bg-img"></div>
+<div class="setup-card">
+  <div style="text-align:center"><span class="setup-badge">🔧 One-Time Setup</span></div>
+  <div class="logo-row">
+    <img src="/static/assets/logo.jpeg" alt="Jugz">
+    <div class="logo-text">
+      <h1>Jugz Liquor &amp; Wine</h1>
+      <p>Joplin, MO</p>
+    </div>
+  </div>
+  <h2 class="form-title">Create Admin Account</h2>
+  <p class="form-sub">Set up your first admin account to get started.<br>You can add more users later from the admin panel.</p>
+  <div class="info-box">
+    <strong>This page appears only once.</strong> After creating your admin account, all future access will go through the login page. You can manage users from the admin panel.
+  </div>
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="field">
+    <label>Admin Username</label>
+    <input type="text" id="username" placeholder="e.g. admin" autocomplete="username" autofocus>
+    <p class="hint">Minimum 3 characters, lowercase</p>
+  </div>
+  <div class="field">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Choose a strong password" autocomplete="new-password">
+    <p class="hint">Minimum 6 characters</p>
+  </div>
+  <div class="field">
+    <label>Confirm Password</label>
+    <input type="password" id="password2" placeholder="Re-enter your password" autocomplete="new-password">
+  </div>
+  <button class="btn-setup" id="setupBtn" onclick="doSetup()">Create Admin Account &amp; Continue</button>
+</div>
+<script>
+function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.classList.add('show'); }
+function hideError() { document.getElementById('errorMsg').classList.remove('show'); }
+
+async function doSetup() {
+  hideError();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const password2 = document.getElementById('password2').value;
+  if (!username || !password) { showError('Please fill in all fields'); return; }
+  if (password !== password2) { showError('Passwords do not match'); return; }
+  if (username.length < 3) { showError('Username must be at least 3 characters'); return; }
+  if (password.length < 6) { showError('Password must be at least 6 characters'); return; }
+  const btn = document.getElementById('setupBtn');
+  btn.disabled = true; btn.textContent = 'Creating account…';
+  try {
+    const res = await fetch('/api/setup', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password})
+    });
+    const data = await res.json();
+    if (res.ok && data.success) { setTimeout(() => { window.location.href = '/'; }, 300); }
+    else { showError(data.error || 'Setup failed'); btn.disabled = false; btn.textContent = 'Create Admin Account & Continue'; }
+  } catch(e) { showError('Connection error'); btn.disabled = false; btn.textContent = 'Create Admin Account & Continue'; }
+}
+
+document.getElementById('password2').addEventListener('keydown', e => { if (e.key === 'Enter') doSetup(); });
+</script>
+</body>
+</html>

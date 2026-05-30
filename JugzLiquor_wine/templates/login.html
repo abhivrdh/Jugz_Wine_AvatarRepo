@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — Jugz Liquor and Wine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C8972A;--gold-l:#E8B84B;--bg:#0a0604;--card:rgba(22,14,8,.85);--bd:rgba(200,151,42,.12);--tx:#f0e6d6;--tx2:rgba(240,230,214,.5)}
+html,body{height:100%;font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg);-webkit-font-smoothing:antialiased}
+body{display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(10,6,4,1) 0%,rgba(30,15,8,.95) 50%,rgba(10,6,4,1) 100%)}
+.bg-img{position:fixed;inset:0;background:url('/static/assets/bg/whiskey.jpg') center/cover no-repeat;opacity:0.08;pointer-events:none}
+.login-card{position:relative;width:100%;max-width:420px;padding:48px 40px;background:var(--card);border:1px solid var(--bd);border-radius:20px;backdrop-filter:blur(20px);box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.logo-row{display:flex;align-items:center;gap:14px;margin-bottom:32px;justify-content:center}
+.logo-row img{width:52px;height:52px;border-radius:50%;object-fit:cover;box-shadow:0 0 20px rgba(200,151,42,.3)}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-l);font-weight:700}
+.logo-text p{font-size:11px;color:var(--tx2);letter-spacing:1.5px;text-transform:uppercase}
+.form-title{font-family:'Playfair Display',serif;font-size:26px;text-align:center;margin-bottom:8px;color:var(--tx)}
+.form-sub{text-align:center;color:var(--tx2);font-size:13px;margin-bottom:32px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;color:var(--tx2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.field input{width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--gold)}
+.field input::placeholder{color:var(--tx2)}
+.btn-login{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-l));border:none;border-radius:12px;color:#1a0e06;font-size:15px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .1s;margin-top:8px}
+.btn-login:hover{opacity:.9}
+.btn-login:active{transform:scale(.98)}
+.btn-login:disabled{opacity:.5;cursor:not-allowed}
+.error-msg{background:rgba(200,40,40,.15);border:1px solid rgba(200,40,40,.3);border-radius:10px;padding:12px 16px;color:#ff6b6b;font-size:13px;margin-bottom:20px;display:none;text-align:center}
+.error-msg.show{display:block}
+.footer-note{text-align:center;margin-top:24px;font-size:11px;color:var(--tx2)}
+@media(max-width:480px){
+  .login-card{margin:16px;padding:36px 24px}
+  .form-title{font-size:22px}
+  .logo-row img{width:44px;height:44px}
+  .logo-text h1{font-size:19px}
+}
+</style>
+</head>
+<body>
+<div class="bg-img"></div>
+<div class="login-card">
+  <div class="logo-row">
+    <img src="/static/assets/logo.jpeg" alt="Jugz">
+    <div class="logo-text">
+      <h1>Jugz Liquor &amp; Wine</h1>
+      <p>Joplin, MO</p>
+    </div>
+  </div>
+  <h2 class="form-title">Welcome Back</h2>
+  <p class="form-sub">Sign in to access Alex AI Sommelier</p>
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="field">
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Enter your username" autocomplete="username" autofocus>
+  </div>
+  <div class="field">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+  </div>
+  <button class="btn-login" id="loginBtn" onclick="doLogin()">Sign In</button>
+  <p class="footer-note">⚠︎ Must be 21+ &nbsp;·&nbsp; Please drink responsibly</p>
+</div>
+<script>
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg; el.classList.add('show');
+}
+function hideError() { document.getElementById('errorMsg').classList.remove('show'); }
+
+async function doLogin() {
+  hideError();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  if (!username || !password) { showError('Please enter username and password'); return; }
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password})
+    });
+    const data = await res.json();
+    if (res.ok && data.success) { setTimeout(() => { window.location.href = '/'; }, 300); }
+    else { showError(data.error || 'Login failed'); btn.disabled = false; btn.textContent = 'Sign In'; }
+  } catch(e) { showError('Connection error. Please try again.'); btn.disabled = false; btn.textContent = 'Sign In'; }
+}
+
+document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('username').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('password').focus(); });
+</script>
+</body>
+</html>
