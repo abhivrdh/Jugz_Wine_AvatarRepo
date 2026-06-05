@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "three": "^0.128.0"
   }
 }
